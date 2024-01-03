@@ -1,6 +1,6 @@
 # Handled.it Checkout
 
-If you're here, you've most likely already been corresponding with me via email.
+If you're here, you've most likely already been corresponding with me and that's how you received this link.
 
 In that case, you can proceed immediately to the [Products List](/products) to start checking out.
 
