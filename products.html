@@ -1,16 +1,14 @@
 <html>
   <head>
-    <title>products page</title>
+    <title>Products Page</title>
     <meta name="robots" content="noindex" />
   </head>
   <body>
-    <h1>products</h1>
-    <h2>test</h2>
-    <!-- Load Stripe.js on your website. -->
+    <h1>Products</h1>
+    <!-- <h2>test</h2>
     <script src="https://js.stripe.com/v3"></script>
 
     <h3>recurring</h3>
-    <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
     <button
       style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
       id="checkout-button-price_1OTreJCt2fMkUTBWd8gC5dOW"
@@ -60,7 +58,6 @@
     </script>
 
     <h3>one-time</h3>
-    <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
     <button
       style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
       id="checkout-button-price_1OTrdFCt2fMkUTBWCCLKI5Fu"
@@ -108,8 +105,8 @@
       });
     })();
     </script>
-  <h2>production</h2>
-  <h3>recurring</h3>
+    <h2>production</h2>-->
+  <h3>Recurring, RPP</h3>
 <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
 <button
   style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
@@ -158,7 +155,7 @@
   });
 })();
 </script>
-  <h3>one-time</h3>
+  <h3>One Time Purchase, OTPA</h3>
 
 <!-- Load Stripe.js on your website. -->
 <script src="https://js.stripe.com/v3"></script>
@@ -187,6 +184,55 @@
      */
     stripe.redirectToCheckout({
       lineItems: [{price: 'price_1OTsalCt2fMkUTBWTwVXfSaK', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: window.location.protocol + '//stripe.handled.it/order-success.html',
+      cancelUrl: window.location.protocol + '//stripe.handled.it/order-canceled.html',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+<h3>One Time Purchase, OTPB</h3>
+<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
+  id="checkout-button-price_1OULGtCt2fMkUTBWxZCmOxs7"
+  role="link"
+  type="button"
+>
+  Checkout
+</button>
+
+<div id="error-message"></div>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_live_51OTrMKCt2fMkUTBWUof6IwBMuTd6bbqyKn19MKTM9FouifIoASUm0OFI0dbvUVZkPCRU7sJZ7cg7XutgswLNvKXE00VikXRy68');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1OULGtCt2fMkUTBWxZCmOxs7');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1OULGtCt2fMkUTBWxZCmOxs7', quantity: 1}],
       mode: 'payment',
       /*
        * Do not rely on the redirect to the successUrl for fulfilling
